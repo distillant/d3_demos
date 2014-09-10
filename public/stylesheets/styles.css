@@ -1,0 +1,126 @@
+body {
+    font-family: source-sans-pro, sans-serif;
+    font-size: 15px;
+    /*padding-top: 60px;*/
+    /*padding-bottom: 40px;*/
+}
+
+.dropdown-menu {
+    max-height: 400px;
+    overflow: auto;
+    width: 230px;
+}
+
+.list-item {
+    padding-top: 6px;
+    padding-left: 56px;
+}
+
+.no-reports {
+    display: none;
+}
+
+#cy {
+    height: 50%;
+    width: 50%;
+    /*position: absolute;*/
+    left: 0;
+    top: 0;
+
+}
+#metadata {
+    height: 50%;
+    width: 50%;
+    /*position: absolute;*/
+    left: 50%;
+    top: 0;
+
+}
+#graphSpace
+{
+
+    border:solid pink 2px;
+    box-shadow: 0px 30px 40px rgba(225,225,225,.1);
+    width:500px;
+    height:400px;
+}
+body
+{
+
+}
+
+.link {
+  stroke: #ccc;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+#nodeDetailsBlock
+{
+    border:solid 1px black;
+    border-radius:4px;
+    padding: 4px;
+    background-color:lightGreen;
+}
+#nodeLabels, #nodeAttributes
+{
+    margin: 7px;
+}
+#nodeLabels .labelPill
+{
+    border-radius:5px;
+    background-color:pink;
+    padding: 5px;
+    margin: 4px;
+}
+
+#lineChart
+{
+    width: 500px;
+    height: 400px;
+    float:left;
+}
+
+#lineChart2
+{
+    width: 500px;
+    height: 400px;
+    float:left;
+}
+
+#pieChart
+{
+    width: 500px;
+    height: 500px;
+    float:left;
+}
+
+#pieChart .legend
+{
+    fill: none;
+    stroke:black;
+    stroke-width:2;
+
+}
+
+#pieChart  text
+{
+    font-size:10px;
+    color:black;
+    fill:black;
+
+
+}
+#lineChart svg line
+{
+    stroke:blue;
+    stroke-width:1;
+}
+
+#lineChart .x.axis line, #lineChart .y.axis line
+{
+    stroke:black;
+    stroke-width:2;
+}

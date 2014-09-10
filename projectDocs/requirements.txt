@@ -1,0 +1,32 @@
+Purpose: the purpose of this project is to demonstrate various implemntation of sever technologies in particular showcasing examples self written d3 visualization plugins.
+requirements:
+code will demonstrate best practices including:
+    responsive design
+    object oriented programming
+    mvp design
+    code isolation
+    tdd
+    compiled css
+    use of lint tools
+    cross-browser compatibility
+    maintenablity and inline documentation
+
+client code will support data driven d3.js visualizations including
+     bar charts
+     line charts
+     pie charts
+     force directed graphs
+client side code will support support real-time updates to graphs from server where appropriate
+    testing of client side code.
+
+server code will support
+    set up of data, converting data from original data source to a searchable format
+    in memory storage of data or database storage
+    ability to filter data based on date,etc as required by visualizations
+    serving of rest feeds for data
+    real time updates to data (sockets)?
+    highly testable of server side code
+    automated testing and deployment
+
+
+

@@ -1,0 +1,15 @@
+-Conversion of financial data
+program accepts input csv data;
+converts first field to date time
+converts other field to numbers
+creates object for each line of csv with properties matching fields of csv
+program loads csv file
+program makes data searchable/filterable
+
+-serving of financial data
+data can be searched and served via rest
+
+
+display of financial data
+processing of financial data
+
