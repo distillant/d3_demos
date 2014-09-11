@@ -72,6 +72,7 @@
     };
 
     var options = {fileName: "source_data/NASDAQ_AAPL.csv", target: "#lineChart", data: [], height: 400, width: 500, margins: {top: 10, right: 10, bottom: 30, left: 40 }};
+    var stockChartOptions  = {fileName: "source_data/NASDAQ_AAPL.csv", target: "#lineChart2", data: [], height: 400, width: 500, margins: {top: 10, right: 10, bottom: 30, left: 40 }};
 
     d3.csv(options.fileName, function (data) {
 
@@ -79,7 +80,10 @@
             d.date = dateTimeParser(d.date);
             return d;
         });
-        options.data = data;
+
         d3.distillant.lineChart(options);
+        stockChartOptions.data=  options.data;
+
+        d3.distillant.stockChart(stockChartOptions);
     });
 }());
