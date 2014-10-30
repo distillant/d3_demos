@@ -7,10 +7,11 @@ var CHLineChart= function(options)
 {
     var xScale,yScale;
 
-    this.data={
-        Line1:[{value: 0}],
-        Line2:[{value:0}]
-    };
+    var dataArray =[];
+    var lineArray=[];
+
+
+   var color= d3.scale.category10();
 
     var that=this;
     var svg =d3.select(options.target)
@@ -18,11 +19,13 @@ var CHLineChart= function(options)
         .attr("width",options.width)
         .attr("height",options.height);
 
-    this.line1=svg.select("path").data(this.data.Line1);
-    this.line2=svg.select("path").data(this.data.Line2);
 
-    this.line1.classed("line1",true);
-    this.line2.classed("line2",true);
+    dataArray.forEach(function(dataItem) {
+
+        lineArray.push(svg.select("path").data(dataItem));
+       // this.line2.classed("line2",true);
+
+    });
 
 
 
@@ -30,25 +33,25 @@ var CHLineChart= function(options)
             .x(function (d, i) {
                 if (typeof d.value != "undefined")
                     return xScale(i);
-                else
-                    return 0;
+               else
+                   return 0;
             })
                 .y(function (d) {
                     if (typeof d.value != "undefined")
                         return yScale(d.value);
                     else
-                        return 0;
+                       return 0;
                 })
                 .y1(function () {
                     return options.height;
                 })
                 .interpolate("basic");
 
-    var addLine= function(dataSet,className) {
+    var addLine= function(dataSet,i) {
 
             svg.append("path")
                 .attr("d", linePath(dataSet))
-                .classed(className, true);
+                .attr("fill",color(i));
 
     };
 
@@ -59,52 +62,54 @@ var CHLineChart= function(options)
         var minutes=1
         var myStartDate = new Date(currentTime - minutes*MS_PER_MINUTE);
         var tempArray=[];
-        data.forEach(function(d)
-        {
-            var itemTime=d.timeStamp;
-            if (itemTime >myStartDate)
-                tempArray.push(d);
-        });
+        for (var i=0; i< data.length; i++)
+         {
+
+              var itemTime=data[i].timeStamp;
+              if (itemTime > myStartDate)
+              {
+                 tempArray.push(data[i]);
+              }
+         }
         return tempArray;
+
+
 
     };
     var redraw =function()
     {
 
-
-
-            xScale = d3.scale.linear()
-                .domain([0, 10])/*
-                 d3.max(10
+            yScale = d3.scale.linear()
+                .domain([0, 10]) /*
+                 d3.max(10,
 
                  Array.concat(that.line1,that.data.Line2), function(d){
                  if( typeof d.value != "undefined" )
                  return +d.value;
                  else return 0;
-                 })*/
+                 })
+                ])  */
 
             .range([0, +options.height]);
-            yScale = d3.scale.linear()
+            xScale = d3.scale.linear()
                 .domain([0, //80] /*
-                 d3.max([80, d3.max([that.data.Line1.length,that.data.Line2.length])])
+                 d3.max([80, d3.max([dataArray[0].length,dataArray[0].length])])
                  ])
                 .range([0, +options.width]);
 
+        svg.selectAll("path").remove();
+        dataArray.forEach(function(dataItem,i) {
 
-        removeOld(that.line1);
-        removeOld(that.line2);
-        addLine(that.line1, "line1");
-    //    addLine(removeOld(that.line1),"line1");
+                dataArray[i]=removeOld(dataItem,i);
+                addLine(dataArray[i],i);
+            }
+        );
 
-        addLine(that.line2,"line2");
 
     };
 
 
-
-
-
-    return({line1:this.line1,line2:this.line2, redraw:redraw });
+    return({dataArray:dataArray, redraw:redraw });
 
 };
 

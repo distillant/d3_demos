@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="javascripts/d3.js"></script>
-    <script src="http://38.118.79.230:30299/socket.io/socket.io.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js" ></script>
+    <!--
+    <script src="http://38.118.79.230:30299/socket.io/socket.io.js"></script> -->
     <script src="CloudHelixLineChart.js"></script>
 <style>
     #lineChartSpace
@@ -13,40 +15,42 @@
         height:400px;
         border: solid black 1px;
     }
-    .line1
+    svg
     {
-        fill:blue;
+        background-color: black;
+    }
+    path
+    {
+
         opacity:.5
 
     }
-    .line2
-    {
-        fill:red;
-        opacity:.5
 
-    }
 </style>
 </head>
 <body>
 <div id="lineChartSpace">
 </div>
 <script>
-    var socket = io.connect('http://38.118.79.230:30299/');
 
-    var chartOtions={
+    //var socket = io.connect('http://38.118.79.230:30299/');
+    var socket = io.connect('http://localhost:3000/');
+    var chartOptions={
         target:"#lineChartSpace",
         width:500,
         height:400
     };
     try {
-        var lineChart = new CHLineChart(chartOtions);
+        var lineChart = new CHLineChart(chartOptions);
     }
     catch(err) {
         console.log(err)
     }
     socket.on('1:CM', function(msg){
-
-        lineChart.line1.push({value:msg, timestamp:new Date()});
+        if (!lineChart.dataArray[0])
+            lineChart.dataArray[0]=[];
+        lineChart.dataArray[0].push({value:msg, timeStamp:new Date()});
+        lineChart.dataArray[0].name="1:CM";
         try {
             lineChart.redraw();
         }
@@ -57,26 +61,14 @@
 
     });
     socket.on('2:CM', function(msg){
-        lineChart.line2.push({value:msg, timestamp:new Date()});
+        if (!lineChart.dataArray[1])
+            lineChart.dataArray[1]=[];
+        lineChart.dataArray[1].push({value:msg, timeStamp:new Date()});
 
     });
-    /*
-    socket.on('msg', function (data) {
-        document.getElementById("messagesReceived").innerHTML=data.toString();
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-    });
-    socket.on('message', function (data) {
-        document.getElementById("messagesReceived").innerHTML = data.message.toString();
-    });
-    function sendMessage(event)
-    {
 
-        var sendText=document.getElementById("MessageToSend").value;
 
-        socket.emit('message', {clientMessage: sendText });
-        return false;
-    }*/
+
 </script>
 </body>
 </html>
