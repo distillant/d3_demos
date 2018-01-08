@@ -1,7 +1,8 @@
 distillant/D3_demos Reusable D3 chart examples
 
-see live demos at http://distillant.com/D3_demos/index.html
-see the https://github.com/distillant/d3_demos/public folder for front end D3 code.
+see blogpost here: http://distillant.com/blog/?p=27
+ ~~see live demos at http://distillant.com/D3_demos/index.html
+see the https://github.com/distillant/d3_demos/public folder for front end D3 code. ~~
 
 When looking at d3 charts examples out on the web I'm always surprised to see how they almost
 never utilize object oriented javascript and therefor are not generalizable or reusable. Granted,
